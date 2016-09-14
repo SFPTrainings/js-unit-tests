@@ -1,12 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('app', [
+  angular.module('app.people', [
     'app.core',
     'app.widgets',
-    'app.admin',
-    'app.dashboard',
-    'app.people',
     'app.layout'
   ]);
 
