@@ -26,6 +26,14 @@
             content: '<i class="fa fa-people"></i> People'
           }
         }
+      },
+      {
+       state: 'person',
+        config: {
+          url: '/person/:id',
+          template: '<section class="mainbar"><div class="matter">person view</div><section>',
+          title: 'person'
+        }
       }
     ];
   }

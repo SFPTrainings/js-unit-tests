@@ -5,12 +5,13 @@
     .module('app.people')
     .controller('PeopleController', PeopleController);
 
-  PeopleController.$inject = ['$q', 'dataservice', 'logger'];
+  PeopleController.$inject = ['$state', '$q', 'dataservice', 'logger'];
   /* @ngInject */
-  function PeopleController($q, dataservice, logger) {
+  function PeopleController($state, $q, dataservice, logger) {
     var vm = this;
 
     vm.people = [];
+    vm.goToPerson = goToPerson;
 
     getPeople();
 
@@ -19,6 +20,12 @@
         .then(function(response){
           vm.people = response;
         });
+    }
+
+    function goToPerson(person) {
+      $state.go('person', {
+        id: person.id
+      });
     }
   }
 })();
