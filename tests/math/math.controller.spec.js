@@ -1,7 +1,10 @@
 describe('Math controller testing', function() {
     var mathController;
-    beforeEach(inject(function($controller) {
-        mathController = $controller('MathController');
+    beforeEach(function() {
+        module('math');
+    });
+    beforeEach(inject(function(_$controller_) {
+        mathController = _$controller_('MathController');
     }));
     it('should initialize controller', function() {
         assert(mathController.calculator.length === 0, 'calculator must be initialized with no numbers');

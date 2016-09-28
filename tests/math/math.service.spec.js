@@ -1,8 +1,8 @@
-beforeEach(function() {
-    module('math');
-});
 describe('Math service testing', function() {
     var mathService;
+    beforeEach(function() {
+        module('math');
+    });
     beforeEach(inject(function(_MathService_) {
         mathService = _MathService_;
     }));
