@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Hero controller testing', function() {
     var heroController;
     var httpBackend;

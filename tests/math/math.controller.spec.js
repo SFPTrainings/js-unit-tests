@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Math controller testing', function() {
     var mathController;
     beforeEach(function() {

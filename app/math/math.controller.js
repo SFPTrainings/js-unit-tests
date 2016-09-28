@@ -1,3 +1,4 @@
+'use strict';
 angular
     .module('math')
     .controller('MathController', function(MathService) {

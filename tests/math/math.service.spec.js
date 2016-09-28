@@ -1,3 +1,4 @@
+'use strict';
 describe('Math service testing', function() {
     var mathService;
     beforeEach(function() {

@@ -1,3 +1,4 @@
+'use strict';
 angular.module('hero')
     .controller('HeroController', function($http, $log) {
         var self = this;

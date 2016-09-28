@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Hero directive testing', function() {
 	var compile,
 		rootScope;
