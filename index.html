@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Quick Start</title>
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/hero/hero.module.js"></script>
+    <script src="app/hero/hero.controller.js"></script>
+    <script src="app/hero/hero.directive.js"></script>
+    <script src="app/math/math.module.js"></script>
+    <script src="app/math/math.controller.js"></script>
+    <script src="app/math/math.service.js"></script>
+</head>
+<body ng-app="quick-start">
+    <h1>Math Exercises</h1>
+    <div ng-controller="MathController as Math">
+        <h3> Calculator </h3>
+        <input type="number" ng-model="Math.member"/>
+        <button ng-click="Math.addToCalculator()">+</button>
+        <button ng-click="Math.clearCalculator()">C</button>
+        <br/>
+        <ul>
+            <li ng-repeat="constant in Math.calculator track by $index">{{constant}}</li>
+        </ul>
+        <hr/>
+        TOTAL = {{Math.sum()}}
+
+        <h3> Ratings </h3>
+        1<input type="range" id="weight" min="1" max="5" step="1" ng-model="Math.rating">5
+        <button ng-click="Math.addToRatings()">Add rating {{Math.rating}}</button>
+        <br/>
+        <span ng-repeat="star in Math.ratings track by $index">[{{star}}] </span>
+        <hr/>
+        AVERAGE = {{Math.calcAverage()}}
+    </div>
+    <h1>Heroes Reveal</h1>
+    <div ng-controller="HeroController as Hero">
+        <button ng-click="Hero.getHeroes()">Reveal Heroes</button>
+        <br/>
+        <br/>
+        <superhero ng-repeat="currentHero in Hero.superheroes track by $index" hero="currentHero"></superhero>
+    </div>
+</body>
+</html>

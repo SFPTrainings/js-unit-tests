@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Batman",
+    "secretName": "Bruce Wayne"
+  },
+  {
+    "name": "Superman",
+    "secretName": "Clark Kent"
+  },
+  {
+    "name": "Wonder Woman",
+    "secretName": "Diana Prince"
+  }
+]
