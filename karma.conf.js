@@ -12,8 +12,9 @@ module.exports = function(config) {
     files: [
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'app/*.js',
-      'tests/*.js'
+      'app/**/*.module.js',
+      'app/**/*.js',
+      'tests/**/*.js'
     ],
 
     // list of files to exclude
@@ -22,12 +23,20 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress', 'coverage'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
 
-    //coverageReporter: {
-    //  dir: gulpConfig.karma.coverage.dir,
-    //  reporters: gulpConfig.karma.coverage.reporters
-    //},
+    preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'app/**/*.js': ['coverage']
+    },
+
+    // optionally, configure the reporter
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
 
     // web server port
     port: 9876,
