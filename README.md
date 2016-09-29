@@ -24,3 +24,4 @@
  * `chai` - assertion library
   * allows us to assert unit test output in a more advanced manner than only with mocha
  * `sinon` - mocking/stubbing/spying library
+ * `karma-coverage` - coverage library, which uses `istanbul`
