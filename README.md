@@ -8,6 +8,8 @@
 
 * start the app by running `npm start`
 
+* run the unit test suite by running `npm run karma`
+
 ### Follow the trainer instructions
 
 
