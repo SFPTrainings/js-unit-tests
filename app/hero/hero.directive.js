@@ -1,7 +1,8 @@
+'use strict';
 angular.module('hero')
     .directive('superhero', function() {
         return {
-            template: '<div>{{superheroController.greet()}}</div>',
+            template: '<div class="hero">{{superheroController.greet()}}</div>',
             bindToController: {
                 hero: '='
             },

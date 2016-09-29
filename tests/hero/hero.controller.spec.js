@@ -1,6 +1,8 @@
+'use strict';
+
 describe('Hero controller testing', function() {
     var heroController;
-    var httpBackend;
+    var $httpBackend;
     var heroes = [
         {
             "name": "Batman",
@@ -13,20 +15,18 @@ describe('Hero controller testing', function() {
             "secretName": "Diana Prince"
         }
     ];
-    beforeEach(function() {
-        module('hero');
-    });
+    beforeEach(module('hero'));
     beforeEach(inject(function(_$controller_, _$httpBackend_) {
-        httpBackend = _$httpBackend_;
+        $httpBackend = _$httpBackend_;
         heroController = _$controller_('HeroController');
     }));
     it('should initialize controller', function() {
         assert(heroController.superheroes.length === 0, 'default list of superheroes must be empty');
     });
     it('should get the list of superheroes', function() {
-        httpBackend.expectGET('app/hero/heroes.json').respond(200, heroes);
+        $httpBackend.expectGET('app/hero/heroes.json').respond(200, heroes);
         heroController.getHeroes();
-        httpBackend.flush();
+        $httpBackend.flush();
         assert.deepEqual(heroController.superheroes, heroes);
     });
     it('should test heroes success callback', function() {
