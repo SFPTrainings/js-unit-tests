@@ -14,8 +14,7 @@ angular.module('hero')
             $log.info('Superheroes list ', self.superheroes);
         };
         self.onHeroesError = function(err) {
-            $log.error('Error: ' + err.statusText)
+            $log.error('Error: ' + err.statusText);
             $log.error('Status: ' + err.status);
-            $log.error('Data: ' + err.data);
         };
     });
