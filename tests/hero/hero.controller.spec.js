@@ -4,62 +4,73 @@ describe('Hero controller testing', function() {
     var heroController;
     var $httpBackend;
     var $log;
-    var heroes = [
-        {
-            "name": "Batman",
-            "secretName": "Bruce Wayne"
-        }, {
-            "name": "Superman",
-            "secretName": "Clark Kent"
-        }, {
-            "name": "Wonder Woman",
-            "secretName": "Diana Prince"
-        }
-    ];
+    var $rootScope;
+    var $q;
+    var HeroService;
 
     beforeEach(module('hero'));
 
-    beforeEach(inject(function(_$controller_, _$httpBackend_, _$log_) {
+    beforeEach(inject(function(_$controller_, _$httpBackend_, _$log_, _$q_, _$rootScope_, _HeroService_) {
         $httpBackend = _$httpBackend_;
         $log = _$log_;
+        $rootScope = _$rootScope_;
+        $q = _$q_;
+        HeroService = _HeroService_;
         heroController = _$controller_('HeroController');
     }));
 
     it('should initialize controller', function() {
         assert(heroController.superheroes.length === 0, 'default list of superheroes must be empty');
     });
+
     describe('getHeroes', function() {
+        var heroes = [
+            {
+                "name": "Batman",
+                "secretName": "Bruce Wayne"
+            }, {
+                "name": "Superman",
+                "secretName": "Clark Kent"
+            }, {
+                "name": "Wonder Woman",
+                "secretName": "Diana Prince"
+            }
+        ];
         var error = {
             status: 404,
-            statusText: 'Page not found',
+            statusText: 'Page not found'
         };
 
         it('should call onHeroesSuccess', function() {
+            var getHeroesStub = sinon.stub(HeroService, 'getHeroes', function() { return $q.when(heroes) });
             var onHeroesSuccessSpy = sinon.spy(heroController, 'onHeroesSuccess');
-            $httpBackend.expectGET('app/hero/heroes.json').respond(200, heroes);
+            
             heroController.getHeroes();
-            $httpBackend.flush();
+            $rootScope.$apply();
 
-            assert(heroController.onHeroesSuccess.calledOnce);
-            assert(heroController.onHeroesSuccess.calledWithMatch({data: heroes}));
+            assert(heroController.onHeroesSuccess.calledOnce, 'should have called onHeroesSuccess');
+            assert(heroController.onHeroesSuccess.calledWith(heroes), 'onHeroesSuccess not called with expected data');
             onHeroesSuccessSpy.restore();
+            getHeroesStub.restore();
         });
 
         it('should call onHeroesError', function() {
+            var getHeroesStub = sinon.stub(HeroService, 'getHeroes', function() { return $q.reject(error)});
             var onHeroesErrorSpy = sinon.spy(heroController, 'onHeroesError');
-            $httpBackend.expect('GET', 'app/hero/heroes.json').respond(404, error);
-            heroController.getHeroes();
-            $httpBackend.flush();
 
-            assert(heroController.onHeroesError.calledOnce);
-            assert(heroController.onHeroesError.calledWithMatch({data: error}));
+            heroController.getHeroes();
+            $rootScope.$apply();
+
+            assert(heroController.onHeroesError.calledOnce, 'should have called onHeroesError');
+            assert(heroController.onHeroesError.calledWith(error));
 
             onHeroesErrorSpy.restore();
+            getHeroesStub.restore();
         });
 
         it('should test heroes success callback', function() {
             var logInfoSpy = sinon.spy($log, 'info');
-            heroController.onHeroesSuccess({data: heroes});
+            heroController.onHeroesSuccess(heroes);
 
             assert.deepEqual(heroController.superheroes, heroes);
             assert.deepEqual($log.info.getCall(0).args[1], heroController.superheroes);
