@@ -2,19 +2,17 @@
 
 describe('Hero controller testing', function() {
     var heroController;
-    var $httpBackend;
+    var HeroService;
     var $log;
     var $rootScope;
     var $q;
-    var HeroService;
 
     beforeEach(module('hero'));
 
-    beforeEach(inject(function(_$controller_, _$httpBackend_, _$log_, _$q_, _$rootScope_, _HeroService_) {
-        $httpBackend = _$httpBackend_;
+    beforeEach(inject(function(_$controller_, _$log_, _$q_, _$rootScope_, _HeroService_) {
         $log = _$log_;
-        $rootScope = _$rootScope_;
         $q = _$q_;
+        $rootScope = _$rootScope_;
         HeroService = _HeroService_;
         heroController = _$controller_('HeroController');
     }));
@@ -44,7 +42,7 @@ describe('Hero controller testing', function() {
         it('should call onHeroesSuccess', function() {
             var getHeroesStub = sinon.stub(HeroService, 'getHeroes', function() { return $q.when(heroes) });
             var onHeroesSuccessSpy = sinon.spy(heroController, 'onHeroesSuccess');
-            
+
             heroController.getHeroes();
             $rootScope.$apply();
 
@@ -55,7 +53,7 @@ describe('Hero controller testing', function() {
         });
 
         it('should call onHeroesError', function() {
-            var getHeroesStub = sinon.stub(HeroService, 'getHeroes', function() { return $q.reject(error)});
+            var getHeroesStub = sinon.stub(HeroService, 'getHeroes', function() { return $q.reject(error) });
             var onHeroesErrorSpy = sinon.spy(heroController, 'onHeroesError');
 
             heroController.getHeroes();

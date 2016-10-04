@@ -1,8 +1,8 @@
 'use strict';
 
 describe('Hero service testing', function() {
-    var $httpBackend;
     var HeroService;
+    var $httpBackend;
 
     beforeEach(module('hero'));
 
