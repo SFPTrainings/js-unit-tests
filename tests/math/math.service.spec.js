@@ -1,12 +1,10 @@
 'use strict';
 describe('Math service testing', function() {
-    var MathService;
+    beforeEach(bard.appModule('math'));
 
-    beforeEach(module('math'));
-
-    beforeEach(inject(function(_MathService_) {
-        MathService = _MathService_;
-    }));
+    beforeEach(function() {
+        bard.inject('MathService');
+    });
 
     it('should add numbers', function() {
         var a = 3; var b = 5; var c = 6;

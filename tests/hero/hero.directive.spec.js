@@ -1,19 +1,16 @@
 'use strict';
 
 describe('Hero directive testing', function() {
-	var $compile;
-    var $rootScope;
     var superheroData = {
         name: 'batman',
         secretName: 'bruce wayne'
     };
 
-    beforeEach(module('hero'));
-    
-    beforeEach(inject(function(_$compile_, _$rootScope_){
-        $compile = _$compile_;
-        $rootScope = _$rootScope_;
-    }));
+    beforeEach(bard.appModule('hero'));
+
+    beforeEach(function() {
+        bard.inject('$compile', '$rootScope');
+    });
 
   it('reveal superhero secret name', function() {
       $rootScope.superheroData = superheroData;

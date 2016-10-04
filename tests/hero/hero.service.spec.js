@@ -1,15 +1,11 @@
 'use strict';
 
 describe('Hero service testing', function() {
-    var HeroService;
-    var $httpBackend;
+    beforeEach(bard.appModule('hero'));
 
-    beforeEach(module('hero'));
-
-    beforeEach(inject(function(_$httpBackend_, _HeroService_){
-        $httpBackend = _$httpBackend_;
-        HeroService = _HeroService_;
-    }));
+    beforeEach(function() {
+        bard.inject('$httpBackend', 'HeroService');
+    });
 
     describe('getHeroes', function() {
         var heroes = [

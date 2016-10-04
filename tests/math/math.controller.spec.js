@@ -4,12 +4,13 @@ describe('Math controller testing', function() {
     var mathController;
     var sum;
 
-    beforeEach(module('math'));
+    beforeEach(bard.appModule('math'));
 
-    beforeEach(inject(function(_$controller_, _MathService_) {
-        mathController = _$controller_('MathController');
-        sum = sinon.stub(_MathService_, 'sum');
-    }));
+    beforeEach(function() {
+        bard.inject('$controller', 'MathService');
+        mathController = $controller('MathController');
+        sum = sinon.stub(MathService, 'sum');
+    });
 
     afterEach(function() {
         sum.restore();

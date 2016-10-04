@@ -1,21 +1,30 @@
 'use strict';
 
+/**
+ * Commented lines are boilerplate code replaced by the use of bard
+* */
+
 describe('Hero controller testing', function() {
     var heroController;
-    var HeroService;
-    var $log;
-    var $rootScope;
-    var $q;
+    // var HeroService;
+    // var $log;
+    // var $rootScope;
+    // var $q;
 
-    beforeEach(module('hero'));
+    beforeEach(bard.appModule('hero'));
 
-    beforeEach(inject(function(_$controller_, _$log_, _$q_, _$rootScope_, _HeroService_) {
-        $log = _$log_;
-        $q = _$q_;
-        $rootScope = _$rootScope_;
-        HeroService = _HeroService_;
-        heroController = _$controller_('HeroController');
-    }));
+    // beforeEach(inject(function(_$controller_, _$log_, _$q_, _$rootScope_, _HeroService_) {
+    //     $log = _$log_;
+    //     $q = _$q_;
+    //     $rootScope = _$rootScope_;
+    //     HeroService = _HeroService_;
+    //     heroController = _$controller_('HeroController');
+    // }));
+
+    beforeEach(function() {
+        bard.inject('$controller', '$log', '$q', '$rootScope', 'HeroService');
+        heroController = $controller('HeroController');
+    });
 
     it('should initialize controller', function() {
         assert(heroController.superheroes.length === 0, 'default list of superheroes must be empty');

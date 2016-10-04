@@ -12,6 +12,7 @@ module.exports = function(config) {
     files: [
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
+      'node_modules/bardjs/bard.js', // need to add bard to files
       'app/**/*.module.js',
       'app/**/*.js',
       'tests/**/*.js'
